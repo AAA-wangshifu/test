@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iguazu Falls - Nature's Grand Masterpiece</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a5c3a;
+            --secondary: #0d3b25;
+            --accent: #e8b923;
+            --light: #f8faf7;
+            --dark: #0a1f12;
+            --text: #2c3e2d;
+            --text-light: #5a6b5c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background-color: var(--light);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Header / Hero */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            background: linear-gradient(135deg, rgba(10,31,18,0.85) 0%, rgba(26,92,58,0.75) 100%),
+                        url('https://kimi-web-img.moonshot.cn/img/c8.alamy.com/5164e0eb556a2400d4c042379eaeec97f63f863c.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(to top, var(--light), transparent);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 4px 20px rgba(0,0,0,0.4);
+            letter-spacing: -1px;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-weight: 300;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator span {
+            display: block;
+            width: 24px;
+            height: 40px;
+            border: 2px solid rgba(255,255,255,0.6);
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .scroll-indicator span::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 8px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 2px;
+            animation: scrollDown 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        @keyframes scrollDown {
+            0% { opacity: 1; top: 8px; }
+            100% { opacity: 0; top: 24px; }
+        }
+
+        /* Student Info Bar */
+        .info-bar {
+            background: var(--secondary);
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .info-bar span {
+            display: inline-block;
+            margin: 0 1.5rem;
+        }
+
+        .info-bar .label {
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            flex-wrap: wrap;
+        }
+
+        nav li {
+            margin: 0;
+        }
+
+        nav a {
+            display: block;
+            padding: 1.2rem 2rem;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a:hover::after {
+            width: 60%;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Introduction */
+        .intro-section {
+            background: white;
+            position: relative;
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .intro-text {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--text);
+        }
+
+        .intro-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .intro-image {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .intro-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .intro-image:hover img {
+            transform: scale(1.03);
+        }
+
+        .intro-image .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            padding: 2rem 1.5rem 1.5rem;
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: var(--secondary);
+            color: white;
+            padding: 4rem 2rem;
+            margin: 0;
+            max-width: 100%;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 1rem;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--accent);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Attractiveness Section */
+        .attractiveness {
+            background: linear-gradient(180deg, var(--light) 0%, white 100%);
+        }
+
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        }
+
+        .feature-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .feature-card .card-content {
+            padding: 2rem;
+        }
+
+        .feature-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--secondary);
+            margin-bottom: 0.8rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Case Study */
+        .case-study {
+            background: white;
+        }
+
+        .case-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .case-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.9;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '"';
+            font-family: 'Playfair Display', serif;
+            font-size: 8rem;
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            opacity: 0.1;
+            line-height: 1;
+        }
+
+        .highlight-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .highlight-box p {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 0;
+            opacity: 0.95;
+        }
+
+        /* Gallery */
+        .gallery-section {
+            background: var(--light);
+            padding: 5rem 2rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 280px);
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item.large {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 1.5rem 1.5rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .gallery-overlay p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        /* Video Section */
+        .video-section {
+            background: var(--secondary);
+            color: white;
+            text-align: center;
+            padding: 5rem 2rem;
+        }
+
+        .video-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1rem;
+        }
+
+        .video-section p {
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* References */
+        .references {
+            background: white;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .references-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .references h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .references-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .references-list li {
+            padding: 1rem 1.5rem;
+            margin-bottom: 0.8rem;
+            background: var(--light);
+            border-left: 4px solid var(--accent);
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            transition: background 0.3s ease;
+        }
+
+        .references-list li:hover {
+            background: #eef2ec;
+        }
+
+        .references-list li a {
+            color: var(--primary);
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .references-list li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        footer p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        footer .footer-name {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .intro-grid {
+                grid-template-columns: 1fr;
+            }
+            .feature-cards {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+            .gallery-item.large {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+            .info-bar span {
+                display: block;
+                margin: 0.3rem 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            nav ul {
+                flex-direction: column;
+            }
+            nav a {
+                padding: 0.8rem;
+                text-align: center;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Fade in animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Student Info Bar -->
+    <div class="info-bar">
+        <span><span class="label">Group</span> Group A</span>
+        <span><span class="label">Team</span> Team 8</span>
+        <span><span class="label">Name</span> Pengfei Wang</span>
+        <span><span class="label">Student ID</span> 2300880069</span>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero" id="home">
+        <div class="hero-content">
+            <p class="subtitle">The New Seven Wonders of Nature</p>
+            <h1>Iguazu Falls</h1>
+            <p style="font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto;">Where the Iguazu River plunges into 275 individual cascades across the border of Brazil and Argentina, creating the most spectacular waterfall system on Earth.</p>
+        </div>
+        <div class="scroll-indicator">
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#attractiveness">Attractiveness</a></li>
+            <li><a href="#case-study">Case Study</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#video">Video</a></li>
+            <li><a href="#references">References</a></li>
+        </ul>
+    </nav>
+
+    <!-- Introduction Section -->
+    <section class="intro-section" id="introduction">
+        <div class="section-header fade-in">
+            <h2>Discovering Iguazu</h2>
+            <p>A natural masterpiece straddling the border between Brazil and Argentina</p>
+        </div>
+
+        <div class="intro-grid">
+            <div class="intro-text fade-in">
+                <p>Located on the border between the Brazilian state of Paraná and the Argentine province of Misiones, Iguazu Falls stands as one of the most awe-inspiring natural wonders on our planet. The name "Iguazu" originates from the Guarani words "y" (water) and "ûasú" (big), literally translating to "big water" — a description that, while accurate, barely captures the overwhelming grandeur of this UNESCO World Heritage Site (UNESCO, 1984).</p>
+
+                <p>The falls system comprises approximately 275 individual cascades spanning nearly 2.7 kilometers in width, with the most dramatic section being the Devil's Throat (Garganta del Diablo), where the river plunges over 80 meters into a narrow chasm, creating a thunderous roar that can be heard from kilometers away (IUCN, 2024). The surrounding Iguazu National Park protects one of the largest remaining fragments of the Atlantic Forest, a biodiversity hotspot that harbors over 2,000 species of vascular plants and iconic wildlife including jaguars, giant otters, and toucans (Chimu Adventures, 2018).</p>
+
+                <p>First brought to global attention by Spanish conquistador Álvar Núñez Cabeza de Vaca in 1541, the falls have since evolved from a remote jungle curiosity into one of the world's premier ecotourism destinations, attracting over 3.2 million visitors annually across both the Brazilian and Argentine sides (Visit 7 Wonders, 2025). Yet despite its popularity, Iguazu remains a place of profound natural power — where the eternal rush of water reminds us of nature's untamed majesty.</p>
+            </div>
+            <div class="intro-image fade-in">
+                <img src="https://kimi-web-img.moonshot.cn/img/pyxis.nymag.com/b5d9aa4e51c7a69b211aece3b7f5e7285539add5.jpg" alt="Iguazu Falls Boardwalk">
+                <div class="caption">The iconic boardwalk at Iguazu Falls, offering visitors an intimate encounter with the cascades.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number">275</span>
+                <span class="stat-label">Individual Cascades</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">2.7km</span>
+                <span class="stat-label">Total Width</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">3.2M+</span>
+                <span class="stat-label">Annual Visitors</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">2,000+</span>
+                <span class="stat-label">Plant Species</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Attractiveness Section -->
+    <section class="attractiveness" id="attractiveness">
+        <div class="section-header fade-in">
+            <h2>Core Attractiveness</h2>
+            <p>What makes Iguazu Falls one of the most captivating destinations on Earth</p>
+        </div>
+
+        <div class="feature-cards">
+            <div class="feature-card fade-in">
+                <img src="https://kimi-web-img.moonshot.cn/img/ripioturismo.com/3d2c5c7cb87669f917a8dda71ddba11a45560206.jpg" alt="Devil's Throat">
+                <div class="card-content">
+                    <h3>The Devil's Throat</h3>
+                    <p>The most dramatic section of the falls, where the Iguazu River converges into a U-shaped chasm, plunging 82 meters with such force that a permanent mist cloud rises 150 meters into the air. This is the heart of Iguazu's power — a place where visitors can stand on suspended walkways and feel the earth tremble beneath their feet (Ripio Turismo, 2024).</p>
+                </div>
+            </div>
+
+            <div class="feature-card fade-in">
+                <img src="https://kimi-web-img.moonshot.cn/img/images.squarespace-cdn.com/e950a536b0e24971c371d71ba649d95f779a09ba" alt="Wildlife">
+                <div class="card-content">
+                    <h3>Atlantic Forest Biodiversity</h3>
+                    <p>The surrounding national parks protect one of the planet's most threatened ecosystems. Home to over 400 bird species, 80 mammals, and countless reptiles and amphibians, the forest offers extraordinary wildlife encounters. The vibrant Toco Toucan, with its oversized orange bill, has become an emblematic symbol of the region's rich avian life (Eco Iguassu, 2024).</p>
+                </div>
+            </div>
+
+            <div class="feature-card fade-in">
+                <img src="https://kimi-web-img.moonshot.cn/img/www.chimuadventures.com/6ba9237c609987d833279baaa14b5c0e265fcad5.jpg" alt="Rainbow at Falls">
+                <div class="card-content">
+                    <h3>Natural Spectacles</h3>
+                    <p>The perpetual mist generated by the falling water creates countless rainbows that arch across the gorge, transforming the landscape into a kaleidoscope of color. During full moon nights, the Argentine side offers rare lunar rainbow tours, where visitors can witness moonbows shimmering in the cascade's spray — a magical phenomenon few places on Earth can offer.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Study Section -->
+    <section class="case-study" id="case-study">
+        <div class="section-header fade-in">
+            <h2>Case Study: Sustainable Tourism Development</h2>
+            <p>Balancing conservation with world-class visitor experiences</p>
+        </div>
+
+        <div class="case-content fade-in">
+            <p>Iguazu Falls represents a compelling case study in sustainable tourism management, demonstrating how a globally significant natural site can accommodate millions of visitors while preserving ecological integrity. The falls are jointly managed by two national parks — Iguazú National Park in Argentina and Iguaçu National Park in Brazil — which together form a transboundary conservation complex that has become a model for international cooperation in protected area management (IUCN, 2024).</p>
+
+            <p>The tourism trajectory of Iguazu underwent a dramatic transformation following its designation as one of the New Seven Wonders of Nature in 2011. Visitor numbers surged from approximately 900,000 annually to over 3.2 million by 2024, with the Brazilian side alone recording 1.89 million visitors in 2024 — the highest post-pandemic figure (Visit 7 Wonders, 2025). This influx brought both economic prosperity and significant environmental pressures, necessitating innovative management strategies.</p>
+
+            <div class="highlight-box">
+                <h3>The Public Use Management Plan (2021)</h3>
+                <p>In response to escalating visitor pressure, the Argentine National Parks Administration (APN) implemented a comprehensive Public Use Management Plan in 2021, establishing a daily carrying capacity of 6,902 visitors. The plan introduced timed entry systems, expanded interpretive infrastructure along National Route 101 to decompress the waterfall area, and implemented the SMART surveillance system for monitoring poaching and illegal fishing (IUCN, 2024).</p>
+            </div>
+
+            <p>On the Brazilian side, concessionaire Urbia Cataratas has pioneered several sustainability initiatives that have garnered international recognition. The company has invested 3.6 million BRL in the Onças do Iguaçu (Jaguars of Iguazu) Project, a flagship conservation program aimed at protecting the region's apex predator population (Global Vision Access, 2025). Additionally, the park has implemented water reuse systems using treated effluents for toilet flushing, significantly reducing freshwater consumption. Free potable water stations have been installed throughout the park to eliminate single-use plastic bottles, while over 3,000 native trees have been planted as part of reforestation efforts.</p>
+
+            <p>The economic model of Iguazu demonstrates how conservation can finance itself. Entrance fees and tourism services generate sufficient revenue to cover park management, research, and conservation activities, with surplus funds supporting the broader National Parks Authority (IUCN, 2024). This financial sustainability has enabled continuous investment in infrastructure, ranger training, and ecological monitoring programs. The park's 2017-2023 Management Plan was developed through broad stakeholder participation, including local communities and indigenous Guarani peoples, ensuring that conservation strategies reflect diverse perspectives and needs.</p>
+
+            <p>However, significant challenges persist. The Baixo Iguaçu hydroelectric plant upstream poses ongoing threats to aquatic biodiversity and natural water flow patterns. Climate change has intensified extreme weather events, with extraordinary floods and droughts becoming increasingly common (IUCN, 2024). Invasive species, including 123 non-native plant species, continue to threaten native ecosystems. Furthermore, the concentration of visitors during peak periods — when daily numbers can exceed 8,000 — strains infrastructure capacity and creates crowding that diminishes the visitor experience.</p>
+
+            <p>Looking forward, the future of Iguazu as a sustainable tourism destination depends on several critical factors. The expansion of low-impact tourism offerings, such as silent kayaking on secondary rivers and ethnobotanical walks led by Guarani communities, provides a pathway for diversifying the visitor experience while reducing pressure on the main waterfall area (Biosphere Sustainable, 2025). The Tri-National Corridor initiative, involving Brazil, Argentina, and Paraguay, aims to create a contiguous protected landscape that enhances habitat connectivity for wide-ranging species like jaguars. As the global tourism industry increasingly prioritizes sustainability, Iguazu's integrated approach to conservation, community engagement, and visitor management offers valuable lessons for other World Heritage sites facing similar pressures.</p>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section" id="gallery">
+        <div class="section-header fade-in">
+            <h2>Visual Journey</h2>
+            <p>Experience the breathtaking beauty of Iguazu through stunning imagery</p>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="gallery-item large fade-in">
+                <img src="https://kimi-web-img.moonshot.cn/img/c8.alamy.com/5164e0eb556a2400d4c042379eaeec97f63f863c.jpg" alt="Iguazu Panoramic">
+                <div class="gallery-overlay">
+                    <h4>Panoramic Majesty</h4>
+                    <p>The full sweep of 275 cascades across the verdant gorge</p>
+                </div>
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="https://kimi-web-img.moonshot.cn/img/pyxis.nymag.com/b5d9aa4e51c7a69b211aece3b7f5e7285539add5.jpg" alt="Boardwalk View">
+                <div class="gallery-overlay">
+                    <h4>The Boardwalk Experience</h4>
+                    <p>Intimate encounters with the thundering waters</p>
+                </div>
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="https://kimi-web-img.moonshot.cn/img/ripioturismo.com/3d2c5c7cb87669f917a8dda71ddba11a45560206.jpg" alt="Devil's Throat">
+                <div class="gallery-overlay">
+                    <h4>Devil's Throat</h4>
+                    <p>The most powerful section of the falls</p>
+                </div>
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="https://kimi-web-img.moonshot.cn/img/images.squarespace-cdn.com/e950a536b0e24971c371d71ba649d95f779a09ba" alt="Toucan">
+                <div class="gallery-overlay">
+                    <h4>Forest Wildlife</h4>
+                    <p>The iconic Toco Toucan in its natural habitat</p>
+                </div>
+            </div>
+            <div class="gallery-item fade-in">
+                <img src="https://kimi-web-img.moonshot.cn/img/www.chimuadventures.com/6ba9237c609987d833279baaa14b5c0e265fcad5.jpg" alt="Cascades and Sky">
+                <div class="gallery-overlay">
+                    <h4>Sky and Water</h4>
+                    <p>Dramatic clouds over the cascading waters</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section" id="video">
+        <h2 class="fade-in">Experience Iguazu</h2>
+        <p class="fade-in">Official promotional video from the Brazilian Tourism Board (Embratur)</p>
+        <div class="video-container fade-in">
+            <iframe src="https://www.youtube.com/embed/3Xn9pK1Xock" title="Iguazu Falls - Brazil Tourism" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <p style="margin-top: 1.5rem; font-size: 0.85rem; opacity: 0.7;">Source: Embratur - Brazilian Tourist Board Official Channel</p>
+    </section>
+
+    <!-- References Section -->
+    <section class="references" id="references">
+        <div class="references-content">
+            <h2>References</h2>
+            <ul class="references-list">
+                <li>Biosphere Sustainable (2025) <em>A new perspective on Puerto Iguazú: a destination beyond its waterfalls.</em> Available at: <a href="https://www.biospheresustainable.com/en/blog/80/a-new-perspective-on-puerto-iguazu-a-destination-beyond-its-waterfalls" target="_blank">https://www.biospheresustainable.com/en/blog/80/a-new-perspective-on-puerto-iguazu-a-destination-beyond-its-waterfalls</a> (Accessed: 28 June 2026).</li>
+
+                <li>Chimu Adventures (2018) <em>Argentina's Sustainable Tourism.</em> Available at: <a href="https://www.chimuadventures.com/en/blog/argentinas-sustainable-tourism" target="_blank">https://www.chimuadventures.com/en/blog/argentinas-sustainable-tourism</a> (Accessed: 28 June 2026).</li>
+
+                <li>Eco Iguassu (2024) <em>Private tours at Iguassu Falls.</em> Available at: <a href="https://www.ecoiguassu.com/wild-life-iguassu-falls" target="_blank">https://www.ecoiguassu.com/wild-life-iguassu-falls</a> (Accessed: 28 June 2026).</li>
+
+                <li>Global Vision Access (2025) <em>Iguassu Falls: A Sustainable Destination and Global Tourism Reference.</em> Available at: <a href="https://globalvisionaccess.com/iguassu-falls-a-sustainable-destination-and-global-tourism-reference/" target="_blank">https://globalvisionaccess.com/iguassu-falls-a-sustainable-destination-and-global-tourism-reference/</a> (Accessed: 28 June 2026).</li>
+
+                <li>IUCN (2024) <em>Iguazú National Park: World Heritage Outlook.</em> Available at: <a href="https://worldheritageoutlook.iucn.org/node/1007" target="_blank">https://worldheritageoutlook.iucn.org/node/1007</a> (Accessed: 28 June 2026).</li>
+
+                <li>MundoWanderlust (2024) <em>Impact of Ecotourism on Iguazu Falls: Conservation and Sustainable Development.</em> Available at: <a href="https://mundowanderlust.com/en/post/impact-ecotourism-iguazu-falls-conservation-sustainable-development/" target="_blank">https://mundowanderlust.com/en/post/impact-ecotourism-iguazu-falls-conservation-sustainable-development/</a> (Accessed: 28 June 2026).</li>
+
+                <li>Ripio Turismo (2024) <em>The amazing Devil's Throat in Iguazu Falls.</em> Available at: <a href="https://ripioturismo.com/travel-guide/argentina/iguazu-falls/the-amazing-devils-throat-in-iguazu-falls/" target="_blank">https://ripioturismo.com/travel-guide/argentina/iguazu-falls/the-amazing-devils-throat-in-iguazu-falls/</a> (Accessed: 28 June 2026).</li>
+
+                <li>UNESCO (1984) <em>Iguazu National Park - World Heritage List.</em> Available at: <a href="https://whc.unesco.org/en/list/303/" target="_blank">https://whc.unesco.org/en/list/303/</a> (Accessed: 28 June 2026).</li>
+
+                <li>Visit 7 Wonders (2025) <em>Iguazu Falls closed 2024 with more than 3,200,000 visits and began 2025 with high hotel occupancy.</em> Available at: <a href="https://visit7wonders.com/2025/01/02/wonder-effect-iguazu-falls-closed-2024-with-more-than-3200000-visits-and-began-2025-with-high-hotel-occupancy/" target="_blank">https://visit7wonders.com/2025/01/02/wonder-effect-iguazu-falls-closed-2024-with-more-than-3200000-visits-and-began-2025-with-high-hotel-occupancy/</a> (Accessed: 28 June 2026).</li>
+
+                <li>Wow Argentina (2022) <em>Iguazu Falls - World Wonder.</em> Available at: <a href="https://www.wow-ar.com/iguazu/" target="_blank">https://www.wow-ar.com/iguazu/</a> (Accessed: 28 June 2026).</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Created by <span class="footer-name">Pengfei Wang</span> | Group A Team 8 | Student ID: 2300880069</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">Iguazu Falls Tourism Website &copy; 2026</p>
+    </footer>
+
+    <script>
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
